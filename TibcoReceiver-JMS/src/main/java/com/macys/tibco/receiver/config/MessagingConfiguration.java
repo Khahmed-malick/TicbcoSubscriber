@@ -23,14 +23,30 @@ public class MessagingConfiguration {
 	@Value("${spring.ems.broker-url}")
 	private String defaultBrokerUrl;
 
+	@Value("${tibco.ems.ssl.identity.path}")
+	private String tibcoIdentCert;
+	
+	@Value("${tibco.ems.ssl.trustedencoding.path}")
+	private String tibcoCertEncodingPath;
+	
+	@Value("${tibco.ems.ssl.certificate.path}")
+	private String tibcoCert;
 
-
+	@Value("${tibco.ems.ssl.username}")
+	private String userName;
+	
+	@Value("${tibco.ems.ssl.password}")
+	private String pwd;
 
 	@Bean
 	public TibjmsConnectionFactory connectionFactory() throws JMSException{
 		TibjmsConnectionFactory connectionFactory = new TibjmsConnectionFactory();
 		connectionFactory.setServerUrl(defaultBrokerUrl);
-
+		connectionFactory.setSSLEnableVerifyHost(false);
+		connectionFactory.setSSLIdentity(tibcoIdentCert);
+		connectionFactory.setSSLTrustedCertificate(tibcoCert,tibcoCertEncodingPath);
+		connectionFactory.setUserName(userName);
+		connectionFactory.setUserPassword(pwd);
 		return connectionFactory;
 	}
 

@@ -32,12 +32,13 @@ public class JmsConsumer {
     private JmsMessagingTemplate jmsMessagingTemplate;
 
 
-	private static final String rtoTibcoTopic  = "RTO_TIBCO_TOPIC";
+	private static final String rtoTibcoTopic = "M.MKT.LTYEMS.OFFER.LTYAPP.POSOffersUpdate.Publish";
 	@JmsListener(destination = rtoTibcoTopic,containerFactory = "myFactory")
 	public void receiveRtoOfferPayLoad(final Message message) throws JMSException {
 		LOG.info("+++++++++++++++++++++++++++++++++++++++++++++++++++++");
 		MessageHeaders headers =  message.getHeaders();
 		LOG.info("Application : headers received : {}", headers);
+		
 
 		
 		
